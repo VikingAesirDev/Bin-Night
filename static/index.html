@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bin Collection Checker</title>
+    <!-- Use relative paths since we're serving from the same domain -->
+    <link rel="stylesheet" href="styles.css">
+	<link rel="shortcut icon" href="/static/favicon.ico">
+	<script>
+    /* Firefox FOUC fix */
+    let FF_FOUC_FIX;
+    </script>
+</head>
+<body>
+    <!-- Your existing HTML content -->
+	    <div class="container">
+        <header>
+            <h1>🗑️ Bin Collection Checker</h1>
+            <p>Check when your bins need to go out</p>
+        </header>
+
+        <main>
+            <div class="search-section">
+                <div class="search-box">
+                    <input 
+                        type="text" 
+                        id="addressInput" 
+                        placeholder="Enter your address (e.g., 97 Maize Street Tenambit)"
+                        autocomplete="off"
+                    >
+                    <button id="searchBtn">Search</button>
+                </div>
+                
+                <div id="suggestions" class="suggestions-container"></div>
+                <div id="loading" class="loading hidden">
+                    <div class="spinner"></div>
+                    <span>Searching...</span>
+                </div>
+            </div>
+
+            <div id="results" class="results-section hidden">
+            </div>
+
+            <div id="error" class="error-section hidden">
+                <div class="error-card">
+                    <h2>❌ No Results Found</h2>
+                    <p id="errorMessage">Please check your address and try again.</p>
+                    <p><a href="https://www.maitland.nsw.gov.au/council/contact-us" target="_blank">Contact Maitland Council</a> if this seems wrong.</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Use relative path for JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>

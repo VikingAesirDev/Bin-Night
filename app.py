@@ -898,7 +898,14 @@ def not_found(error):
 
 # APPLICATION STARTUP
 
+import os
+# At the end of your app.py, change this:
 if __name__ == '__main__':
+    app.run(
+        debug=False,  # Never use debug=True in production
+        host='0.0.0.0',  # Listen on all interfaces
+        port=int(os.environ.get('PORT', 3000))  # Use PORT environment variable
+    )
     # Clean up expired in-memory cache entries on startup
     if not USE_REDIS:
         in_memory_cache.clear()

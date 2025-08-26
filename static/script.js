@@ -7,7 +7,7 @@
 class BinCollectionApp {
     constructor() {
         // API configuration - points to our Flask proxy server
-        this.apiBaseURL = 'http://localhost:3000/api';
+        this.apiBaseURL = '/api';
         
         // Initialize DOM elements and event listeners
         this.initializeElements();

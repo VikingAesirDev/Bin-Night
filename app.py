@@ -20,8 +20,16 @@ load_dotenv()
 # Initialize Flask application
 app = Flask(__name__)
 
-# Configure CORS to allow requests from your frontend
-CORS(app, origins=['http://localhost:3000', 'http://127.0.0.1:3000'])
+# FIXED CORS configuration
+CORS(app, resources={
+    r"/api/*": {  # ← Added missing colon
+        "origins": [
+            'http://192.168.50.194:5000', 
+            'http://127.0.0.1:5000',  # ← Fixed unclosed quote
+            'https://binnight.lroytech.cc'
+        ]
+    }
+})
 
 # Configure logging for debugging and monitoring
 logging.basicConfig(level=logging.INFO)
@@ -29,12 +37,13 @@ logger = logging.getLogger(__name__)
 
 # Try to connect to Redis for caching (fallback to in-memory if unavailable)
 try:
+# FIXED:
     redis_client = redis.Redis(
-        host=os.getenv('REDIS_HOST', 'localhost'),
-        port=int(os.getenv('REDIS_PORT', 6379)),
-        db=0,
-        decode_responses=True
-    )
+    host=os.getenv('REDIS_HOST', 'localhost'),
+    port=int(os.getenv('REDIS_PORT', 6379)),
+    db=0,
+    decode_responses=True
+)
     redis_client.ping()  # Test Redis connection
     logger.info("Connected to Redis for caching")
     USE_REDIS = True
@@ -46,7 +55,7 @@ except (redis.ConnectionError, redis.RedisError):
 # Configure rate limiting to prevent API abuse
 limiter = Limiter(
     app=app,
-    key_func=get_remote_address,  # Rate limit by IP address
+    key_func=get_remote_address,
     default_limits=["100 per hour", "20 per minute"]
 )
 
@@ -904,7 +913,7 @@ if __name__ == '__main__':
     app.run(
         debug=False,  # Never use debug=True in production
         host='0.0.0.0',  # Listen on all interfaces
-        port=int(os.environ.get('PORT', 3000))  # Use PORT environment variable
+        port=int(os.environ.get('PORT', 5000))  # Use PORT environment variable
     )
     # Clean up expired in-memory cache entries on startup
     if not USE_REDIS:

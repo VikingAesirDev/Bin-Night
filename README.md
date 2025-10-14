@@ -1,4 +1,4 @@
-# Bin Collection Checker
+# Bin-Night
 
 A web application that checks bin collection dates for Maitland Council area, integrating data from:
 - 🗑️ **Maitland Council** (General Waste - Red Bin)
@@ -25,7 +25,7 @@ A web application that checks bin collection dates for Maitland Council area, in
 ## Installation
 
 1. Clone the repository:
-git clone https://github.com/yourusername/bin-collection-checker.git
+git clone https://github.com/yourusername/Bin-Night.git
 cd bin-collection-checker
 
 2. Install dependencies:
